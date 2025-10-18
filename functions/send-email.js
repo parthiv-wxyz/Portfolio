@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 
-exports.handler = async function(event) {
+exports.handler = async function (event) {
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
@@ -17,7 +17,8 @@ exports.handler = async function(event) {
 
   try {
     await transporter.sendMail({
-      from: email,
+      from: `"${firstName} ${lastName}" <${process.env.GMAIL_USER}>`,
+      replyTo: email,
       to: process.env.GMAIL_USER,
       subject: `Message from ${firstName} ${lastName}`,
       text: message,

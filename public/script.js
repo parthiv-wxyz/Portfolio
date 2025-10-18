@@ -87,23 +87,22 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+const form = document.querySelector("form");
 
-const form = document.querySelector('form');
-
-form.addEventListener('submit', async (e) => {
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const data = {
     firstName: form.querySelector('input[placeholder="First Name"]').value,
     lastName: form.querySelector('input[placeholder="Last Name"]').value,
     email: form.querySelector('input[placeholder="Email Address"]').value,
-    message: form.querySelector('textarea').value,
+    message: form.querySelector("textarea").value,
   };
 
   try {
-    const res = await fetch('/.netlify/functions/send-email', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    const res = await fetch("/.netlify/functions/send-email", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
 
@@ -112,6 +111,6 @@ form.addEventListener('submit', async (e) => {
     form.reset();
   } catch (err) {
     console.error(err);
-    alert('Something went wrong. Try again later.');
+    alert("Something went wrong. Try again later.");
   }
 });
